@@ -30,11 +30,6 @@ public class AppUserService {
         return appUserRepository.findById(id);
     }
 
-    // Kullanıcı adınıyla kullanıcıyı bulma
-    public Optional<AppUser> getAppUserByUsername(String username) {
-        return appUserRepository.findByUsername(username);
-    }
-
     // E-posta ile kullanıcıyı bulma
     public Optional<AppUser> getAppUserByEmail(String email) {
         return appUserRepository.findByEmail(email);

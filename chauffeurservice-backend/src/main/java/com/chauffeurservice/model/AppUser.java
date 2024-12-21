@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import java.util.Objects;
 
 
+
 @Entity
 public class AppUser extends BaseEntity {
 
@@ -17,9 +18,6 @@ public class AppUser extends BaseEntity {
 
     @Column(nullable = false)
     private String lastName;
-
-    @Column(nullable = false, unique = true)
-    private String username;
 
     @Column(nullable = false)
     private String password;
@@ -55,14 +53,6 @@ public class AppUser extends BaseEntity {
 
     public void setLastName(String lastName) {
         this.lastName = lastName;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
     }
 
     public String getPassword() {
@@ -102,25 +92,17 @@ public class AppUser extends BaseEntity {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
         AppUser appUser = (AppUser) o;
-        return active == appUser.active && Objects.equals(userId, appUser.userId) && Objects.equals(firstName, appUser.firstName) && Objects.equals(lastName, appUser.lastName) && Objects.equals(username, appUser.username) && Objects.equals(password, appUser.password) && Objects.equals(email, appUser.email) && Objects.equals(role, appUser.role);
+        return active == appUser.active && Objects.equals(userId, appUser.userId) && Objects.equals(firstName, appUser.firstName) && Objects.equals(lastName, appUser.lastName) && Objects.equals(password, appUser.password) && Objects.equals(email, appUser.email) && Objects.equals(role, appUser.role);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(userId, firstName, lastName, username, password, email, active, role);
+        return Objects.hash(userId, firstName, lastName, password, email, active, role);
     }
 
     @Override
     public String toString() {
-        return "AppUser{" +
-                "userId=" + userId +
-                ", firstName='" + firstName + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", username='" + username + '\'' +
-                ", email='" + email + '\'' +
-                ", active=" + active +
-                ", role='" + role + '\'' +
-                '}';
+        return "AppUser{" + "userId=" + userId + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\'' + ", password='" + password + '\'' + ", email='" + email + '\'' + ", active=" + active + ", role='" + role + '\'' + '}';
     }
 }
 

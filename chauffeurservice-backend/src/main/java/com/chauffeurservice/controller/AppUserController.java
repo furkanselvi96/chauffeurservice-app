@@ -25,9 +25,6 @@ public class AppUserController {
     // Create: Yeni kullanıcı kaydetme
     @PostMapping("/register")
     public ResponseEntity<String> registerUser(@RequestBody AppUser appUser) {
-        if (appUserService.getAppUserByUsername(appUser.getUsername()).isPresent()) {
-            return new ResponseEntity<>("Kullanıcı Adı zaten mevcut", HttpStatus.BAD_REQUEST);
-        }
         if (appUserService.getAppUserByEmail(appUser.getEmail()).isPresent()) {
             return new ResponseEntity<>("Email zaten mevcut", HttpStatus.BAD_REQUEST);
         }
