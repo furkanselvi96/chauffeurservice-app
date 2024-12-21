@@ -10,7 +10,7 @@ import '@vaadin/vaadin-lumo-styles/vaadin-iconset.js';
 const loadOnDemand = (key) => {
   const pending = [];
   if (key === 'ac7ca9d317a9d80e2ff8380edc897f6e1bd9fa6ae6da6970121f029b87cbf5e5') {
-    pending.push(import('./chunks/chunk-d92a06a7762515ac5eda73ee8e6b3de6dd7322906dce88c06ef0f1a15023e386.js'));
+    pending.push(import('./chunks/chunk-6dd664b5a553894cacc3efb0182966e47b4490c7670b465b5812d8ec041ee7a4.js'));
   }
   return Promise.all(pending);
 }

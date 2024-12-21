@@ -2,9 +2,12 @@ package com.chauffeurservice.view;
 
 import com.chauffeurservice.controller.AppUserController;
 import com.chauffeurservice.model.AppUser;
+import com.vaadin.flow.component.Text;
 import com.vaadin.flow.component.button.Button;
+import com.vaadin.flow.component.dependency.JavaScript;
+import com.vaadin.flow.component.dialog.Dialog;
 import com.vaadin.flow.component.formlayout.FormLayout;
-import com.vaadin.flow.component.notification.Notification;
+import com.vaadin.flow.component.html.Image;
 import com.vaadin.flow.component.orderedlayout.VerticalLayout;
 import com.vaadin.flow.component.textfield.EmailField;
 import com.vaadin.flow.component.textfield.PasswordField;
@@ -13,6 +16,7 @@ import com.vaadin.flow.router.Route;
 import org.springframework.beans.factory.annotation.Autowired;
 
 @Route("register")
+@JavaScript("./scripts/custom.js")
 public class UserCreateView extends VerticalLayout {
 
     @Autowired
@@ -25,11 +29,23 @@ public class UserCreateView extends VerticalLayout {
 
     public UserCreateView() {
         FormLayout formLayout = new FormLayout();
-        formLayout.add(firstName, lastName, email, password);
-
         Button saveButton = new Button("Kaydet", event -> registerUser());
+        Image logo = new Image("frontend/images/logo.png", null);
+        logo.setWidth("500px");
+        formLayout.add(
+                logo,
+                firstName,
+                lastName,
+                email,
+                password,
+                saveButton // Kaydet Butonu
+        );
+        saveButton.getElement().setProperty("title", "Click to create a new user");
 
-        add(formLayout, saveButton);
+        formLayout.addClassName("form-layout");
+        formLayout.setMaxWidth("400px");
+        formLayout.getStyle().set("margin", "auto"); // Ortaya hizalama
+        add(formLayout);
     }
 
     private void registerUser() {
@@ -41,7 +57,10 @@ public class UserCreateView extends VerticalLayout {
         appUser.setActive(true);
         appUser.setRole("USER");
         String response = appUserController.registerUser(appUser).getBody();
-        Notification.show(response, 3000, Notification.Position.MIDDLE);
+        Dialog dialog = new Dialog();
+        dialog.add(new Text(response));
+        dialog.open();
+
     }
 }
 
