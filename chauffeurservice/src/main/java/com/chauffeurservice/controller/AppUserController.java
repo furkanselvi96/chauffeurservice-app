@@ -22,16 +22,6 @@ public class AppUserController {
         return new ResponseEntity<>("AppUserController Test Success", HttpStatus.ACCEPTED);
     }
 
-    // Create: Yeni kullanıcı kaydetme
-    @PostMapping("/register")
-    public ResponseEntity<String> registerUser(@RequestBody AppUser appUser) {
-        if (appUserService.getAppUserByEmail(appUser.getEmail()).isPresent()) {
-            return new ResponseEntity<>("Email zaten mevcut", HttpStatus.BAD_REQUEST);
-        }
-        appUserService.saveAppUser(appUser);
-        return new ResponseEntity<>("Kullanıcı Oluşturuldu", HttpStatus.CREATED);
-    }
-
 
     // Read: Tüm kullanıcıları listeleme
     @GetMapping()
